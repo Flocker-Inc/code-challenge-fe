@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Flocker Code Challenge",
+    "slug": "flocker-code-challenge-fe",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#F4F5F8"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "ai.flocker.codechallengefe"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#F4F5F8"
+      },
+      "package": "ai.flocker.codechallengefe"
+    },
+    "extra": {
+      "apiBaseUrl": "http://localhost:8000",
+      "useMockApi": true
+    }
+  }
+}
