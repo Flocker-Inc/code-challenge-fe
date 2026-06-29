@@ -12,56 +12,17 @@ const mockCategories: EventCategory[] = [
   { id: 8, name: 'Fitness', icon: '💪' },
 ];
 
-function randomInt(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 function hoursFromNow(hours: number): string {
   const d = new Date();
   d.setHours(d.getHours() + hours);
   return d.toISOString();
 }
 
-function randomCategory(): EventCategory {
-  return mockCategories[randomInt(0, mockCategories.length - 1)];
-}
-
-function mockEvent(overrides: Partial<Event> & { id: string; title: string }): Event {
-  const cat = randomCategory();
-  return {
-    description: 'Join us for an amazing time! This is going to be a fun event with great people.',
-    category_id: cat.id,
-    category: cat,
-    host_id: 'host-1',
-    host: {
-      id: 'host-1',
-      first_name: ['Alex', 'Jordan', 'Sam', 'Taylor', 'Morgan', 'Casey', 'Riley', 'Quinn'][randomInt(0, 7)],
-      last_name: ['Smith', 'Jones', 'Garcia', 'Wilson', 'Lee', 'Martinez', 'Brown', 'Davis'][randomInt(0, 7)],
-      display_name: undefined,
-      profile_image_url: undefined,
-      trust_level: 'member',
-    },
-    location_name: ['Downtown Cafe', 'Riverside Park', 'The Loft Studio', 'Community Center', 'Harbor View', 'City Library', 'Art Gallery', 'Rooftop Bar'][randomInt(0, 7)],
-    address: `${randomInt(100, 9999)} ${['Main St', 'Oak Ave', 'Broadway', 'Park Dr', 'Lake Rd', 'Market Sq'][randomInt(0, 5)]}`,
-    start_time: hoursFromNow(randomInt(2, 168)),
-    end_time: hoursFromNow(randomInt(3, 170)),
-    max_capacity: randomInt(10, 100),
-    current_capacity: randomInt(0, 30),
-    member_count: randomInt(1, 25),
-    is_member: false,
-    price: Math.random() > 0.7 ? randomInt(5, 50) : 0,
-    visibility: 'public',
-    distance_miles: parseFloat((Math.random() * 15).toFixed(1)),
-    created_at: hoursFromNow(-randomInt(24, 720)),
-    cover_image_url: undefined,
-    ...overrides,
-  };
-}
-
 const mockEventsData: Event[] = [
   {
     id: 'evt-1',
     title: 'Sunset Hike & Picnic',
+    cover_image_url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop',
     category_id: 1,
     category: mockCategories[0],
     host_id: 'host-1',
@@ -83,6 +44,7 @@ const mockEventsData: Event[] = [
   {
     id: 'evt-2',
     title: 'Sushi Rolling Workshop',
+    cover_image_url: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&auto=format&fit=crop',
     category_id: 2,
     category: mockCategories[1],
     host_id: 'host-2',
@@ -104,6 +66,7 @@ const mockEventsData: Event[] = [
   {
     id: 'evt-3',
     title: 'Pickup Basketball',
+    cover_image_url: 'https://images.unsplash.com/photo-1546519638405-a8c39f5c0549?w=800&auto=format&fit=crop',
     category_id: 3,
     category: mockCategories[2],
     host_id: 'host-3',
@@ -125,6 +88,7 @@ const mockEventsData: Event[] = [
   {
     id: 'evt-4',
     title: 'Acoustic Open Mic Night',
+    cover_image_url: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop',
     category_id: 4,
     category: mockCategories[3],
     host_id: 'host-4',
@@ -146,6 +110,7 @@ const mockEventsData: Event[] = [
   {
     id: 'evt-5',
     title: 'Watercolor Painting Session',
+    cover_image_url: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&auto=format&fit=crop',
     category_id: 5,
     category: mockCategories[4],
     host_id: 'host-5',
@@ -188,6 +153,7 @@ const mockEventsData: Event[] = [
   {
     id: 'evt-7',
     title: 'Morning Yoga in the Park',
+    cover_image_url: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop',
     category_id: 8,
     category: mockCategories[7],
     host_id: 'host-7',
@@ -230,6 +196,7 @@ const mockEventsData: Event[] = [
   {
     id: 'evt-9',
     title: 'Trail Run: 5K Loop',
+    cover_image_url: 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&auto=format&fit=crop',
     category_id: 3,
     category: mockCategories[2],
     host_id: 'host-9',
@@ -251,6 +218,7 @@ const mockEventsData: Event[] = [
   {
     id: 'evt-10',
     title: 'Vinyl Listening Party',
+    cover_image_url: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=800&auto=format&fit=crop',
     category_id: 4,
     category: mockCategories[3],
     host_id: 'host-10',

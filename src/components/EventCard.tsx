@@ -5,15 +5,14 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  Dimensions,
+  useWindowDimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Event } from '../types';
 import { colors } from '../theme/colors';
 import { fonts } from '../theme/typography';
 import Avatar from './Avatar';
-
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 interface EventCardProps {
   event: Event;
@@ -32,20 +31,26 @@ function formatDate(dateStr: string): string {
 }
 
 export default function EventCard({ event, onPress }: EventCardProps) {
+  const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
   const hostName = event.host
     ? `${event.host.first_name} ${event.host.last_name}`
     : 'Unknown Host';
 
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={1}>
+    <TouchableOpacity
+      style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}
+      onPress={onPress}
+      activeOpacity={1}
+    >
       {event.cover_image_url ? (
         <Image
           source={{ uri: event.cover_image_url }}
-          style={styles.image}
+          style={StyleSheet.absoluteFillObject}
           resizeMode="cover"
         />
       ) : (
-        <View style={[styles.image, styles.imagePlaceholder]}>
+        <View style={[StyleSheet.absoluteFillObject, styles.imagePlaceholder]}>
           <Text style={styles.imagePlaceholderText}>
             {event.category?.icon ?? '📍'}
           </Text>
@@ -54,11 +59,11 @@ export default function EventCard({ event, onPress }: EventCardProps) {
 
       <LinearGradient
         colors={['transparent', 'rgba(0,0,0,0.85)']}
-        style={styles.gradient}
+        style={[styles.gradient, { height: SCREEN_HEIGHT * 0.45 }]}
         pointerEvents="none"
       />
 
-      <View style={styles.overlay}>
+      <View style={[styles.overlay, { bottom: 24 + insets.bottom }]}>
         <View style={styles.hostRow}>
           <Avatar
             uri={event.host?.profile_image_url}
@@ -95,13 +100,6 @@ export default function EventCard({ event, onPress }: EventCardProps) {
 }
 
 const styles = StyleSheet.create({
-  card: {
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
-  },
-  image: {
-    ...StyleSheet.absoluteFillObject,
-  },
   imagePlaceholder: {
     backgroundColor: colors.background,
     justifyContent: 'center',
@@ -115,13 +113,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    height: SCREEN_HEIGHT * 0.45,
   },
   overlay: {
     position: 'absolute',
     left: 24,
     right: 24,
-    bottom: 80,
   },
   hostRow: {
     flexDirection: 'row',
